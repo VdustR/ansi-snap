@@ -1,0 +1,97 @@
+@font-face {
+  font-family: "Maple Mono NF CN";
+  src:
+    url("https://font.subf.dev/MapleMono-NF-CN-Regular.woff2") format("woff2"),
+    url("/fonts/MapleMono-NF-CN-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maple Mono NF CN";
+  src:
+    url("https://font.subf.dev/MapleMono-NF-CN-Bold.woff2") format("woff2"),
+    url("/fonts/MapleMono-NF-CN-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maple Mono NF CN";
+  src:
+    url("https://font.subf.dev/MapleMono-NF-CN-Italic.woff2") format("woff2"),
+    url("/fonts/MapleMono-NF-CN-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maple Mono NF CN";
+  src:
+    url("https://font.subf.dev/MapleMono-NF-CN-BoldItalic.woff2") format("woff2"),
+    url("/fonts/MapleMono-NF-CN-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: #0f172a;
+  color: #f8fafc;
+  line-height: 1.5;
+}
+
+#app {
+  height: 100%;
+}
+
+/* Accessibility: focus states */
+:focus-visible {
+  outline: 2px solid #22c55e;
+  outline-offset: 2px;
+}
+
+/* Respect motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.checkerboard {
+  background-image:
+    linear-gradient(45deg, #808080 25%, transparent 25%),
+    linear-gradient(-45deg, #808080 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #808080 75%),
+    linear-gradient(-45deg, transparent 75%, #808080 75%);
+  background-size: 16px 16px;
+  background-position:
+    0 0,
+    0 8px,
+    8px -8px,
+    -8px 0;
+}

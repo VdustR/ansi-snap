@@ -1,0 +1,35 @@
+{
+  "name": "ansi-snap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev",
+    "build": "vue-tsc -b && vp build",
+    "preview": "vp preview",
+    "check": "vp check",
+    "test": "vp test"
+  },
+  "dependencies": {
+    "html-to-image": "^1.11.13",
+    "vue": "^3.5.30"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.0",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "@vue/tsconfig": "^0.9.0",
+    "jsdom": "^29.0.0",
+    "typescript": "~5.9.3",
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vite-plus": "latest",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@^0.1.12",
+    "vue-tsc": "^3.2.5"
+  },
+  "packageManager": "pnpm@10.32.1",
+  "pnpm": {
+    "overrides": {
+      "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+      "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
+    }
+  }
+}
