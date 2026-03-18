@@ -14,6 +14,7 @@ const emit = defineEmits<{
 
 const { filtered, query, loading, loaded, loadAllThemes } = useThemeSearch();
 
+// Keep in sync with .combobox-option { height } and .combobox-list { max-height }
 const ITEM_HEIGHT = 28;
 const VIEWPORT_HEIGHT = 240;
 const BUFFER = 5;
@@ -210,7 +211,7 @@ watch(query, () => {
   top: 100%;
   left: 0;
   right: 0;
-  max-height: 240px;
+  max-height: 240px; /* keep in sync with VIEWPORT_HEIGHT */
   overflow-y: auto;
   background: #1e293b;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -235,7 +236,7 @@ watch(query, () => {
   align-items: center;
   gap: 8px;
   padding: 6px 8px;
-  height: 28px;
+  height: 28px; /* keep in sync with ITEM_HEIGHT */
   box-sizing: border-box;
   cursor: pointer;
   font-size: 12px;
