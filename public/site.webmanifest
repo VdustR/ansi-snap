@@ -1,0 +1,26 @@
+{
+  "name": "ansi-snap — Terminal Text to Image",
+  "short_name": "ansi-snap",
+  "description": "Paste rich terminal text with ANSI colors preserved, customize the frame and appearance, and export as PNG/SVG. 485+ themes, window chrome styles, and transparent background support.",
+  "start_url": "/ansi-snap/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,6 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#282c34"/>
-  <text x="4" y="22" font-family="monospace" font-size="16" font-weight="bold">
-    <tspan fill="#e06c75">&gt;</tspan><tspan fill="#98c379">_</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 120 120">
+  <defs>
+    <clipPath id="c">
+      <path d="M25,40 L60,40 L42,70Z"/>
+    </clipPath>
+  </defs>
+  <rect width="120" height="120" rx="20" fill="#1a1a2e"/>
+  <g opacity="0.55">
+    <path d="M60,20 L78,50 L42,50Z" fill="#5DCAA5"/>
+    <path d="M95,40 L78,70 L60,40Z" fill="#85B7EB"/>
+    <path d="M95,76 L60,76 L78,46Z" fill="#EF9F27"/>
+    <path d="M60,96 L42,66 L78,66Z" fill="#F09595"/>
+    <path d="M25,76 L42,46 L60,76Z" fill="#AFA9EC"/>
+    <path d="M25,40 L60,40 L42,70Z" fill="#ED93B1"/>
+    <g clip-path="url(#c)">
+      <path d="M60,20 L78,50 L42,50Z" fill="#5DCAA5"/>
+    </g>
+  </g>
+  <path d="M40,46 L56,58 L40,70" fill="none" stroke="#e0e0e0" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M62,70 L80,70" fill="none" stroke="#e0e0e0" stroke-width="4.5" stroke-linecap="round"/>
 </svg>
