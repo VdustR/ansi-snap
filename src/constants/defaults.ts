@@ -28,5 +28,7 @@ export const defaults: AnsiSnapSettings = {
   contentPaddingX: 16,
   contentPaddingY: 12,
 
+  exportPixelRatio: 2,
+
   customCss: "",
 };

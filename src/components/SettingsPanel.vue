@@ -18,7 +18,10 @@ const { settings, resetToDefaults } = useSettings();
 <template>
   <aside class="settings-panel">
     <div class="settings-header">
-      <h1 class="settings-title">ansi-snap</h1>
+      <h1 class="settings-title">
+        <img src="/favicon.svg" alt="" width="24" height="24" class="settings-logo" />
+        ansi-snap
+      </h1>
       <button class="reset-btn" title="Reset to defaults" @click="resetToDefaults">
         <svg
           width="16"
@@ -96,9 +99,16 @@ const { settings, resetToDefaults } = useSettings();
 }
 
 .settings-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 18px;
   font-weight: 600;
   color: #fff;
+}
+
+.settings-logo {
+  flex-shrink: 0;
 }
 
 .reset-btn {

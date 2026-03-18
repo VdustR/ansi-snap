@@ -18,6 +18,9 @@ const ALLOWED_STYLES = new Set([
   "display",
 ]);
 
+// Block-level tags that act as wrappers and should be peeled off
+const WRAPPER_TAGS = new Set(["DIV", "PRE", "SECTION", "ARTICLE", "MAIN"]);
+
 export function sanitizeHtml(html: string): PasteResult {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
@@ -33,24 +36,13 @@ export function sanitizeHtml(html: string): PasteResult {
     styleEl.remove();
   }
 
-  // Detect wrapper div colors (Ghostty html mode)
-  let detectedBackground: string | null = null;
-  let detectedForeground: string | null = null;
-  const wrapper = doc.body.querySelector(":scope > div");
-  if (wrapper instanceof HTMLElement) {
-    const wrapperBg = wrapper.style.backgroundColor;
-    const wrapperFg = wrapper.style.color;
-    if (wrapperBg) detectedBackground = wrapperBg;
-    if (wrapperFg) detectedForeground = wrapperFg;
-  }
-
   // Remove unsafe tags
   for (const tag of doc.querySelectorAll("script,meta,link,title,head")) {
     tag.remove();
   }
 
-  // Sanitize inline styles on all elements
-  for (const el of doc.querySelectorAll("*")) {
+  // Sanitize inline styles on elements that have them
+  for (const el of doc.querySelectorAll("[style]")) {
     if (!(el instanceof HTMLElement)) continue;
     const style = el.style;
     const keepStyles: string[] = [];
@@ -67,14 +59,31 @@ export function sanitizeHtml(html: string): PasteResult {
     }
   }
 
-  // Unwrap the outer wrapper if present
-  let resultHtml: string;
-  const bodyChildren = doc.body.children;
-  if (bodyChildren.length === 1 && bodyChildren[0] instanceof HTMLElement) {
-    resultHtml = bodyChildren[0].innerHTML;
-  } else {
-    resultHtml = doc.body.innerHTML;
+  // Unwrap nested single-child wrapper elements (div, pre, etc.)
+  // and detect background/foreground from the outermost wrapper that has them.
+  // This handles both:
+  //   - Ghostty/editor: <body><div style="color:…;background-color:…">…</div>
+  //   - VS Code terminal (xterm.js): <body><pre><div style="…">…</div></pre>
+  let detectedBackground: string | null = null;
+  let detectedForeground: string | null = null;
+  let unwrapTarget: Element = doc.body;
+
+  while (unwrapTarget.children.length === 1) {
+    const child = unwrapTarget.children[0]!;
+    if (!(child instanceof HTMLElement)) break;
+    if (!WRAPPER_TAGS.has(child.tagName)) break;
+
+    if (!detectedBackground && child.style.backgroundColor) {
+      detectedBackground = child.style.backgroundColor;
+    }
+    if (!detectedForeground && child.style.color) {
+      detectedForeground = child.style.color;
+    }
+
+    unwrapTarget = child;
   }
+
+  const resultHtml = unwrapTarget.innerHTML;
 
   return {
     html: resultHtml,
