@@ -15,9 +15,7 @@ function close() {
       <p v-if="offlineReady">App ready to work offline</p>
       <p v-else>New content available.</p>
       <div class="pwa-toast-actions">
-        <button v-if="needRefresh" class="pwa-reload" @click="updateServiceWorker()">
-          Reload
-        </button>
+        <button v-if="needRefresh" class="pwa-reload" @click="updateServiceWorker()">Reload</button>
         <button @click="close">Close</button>
       </div>
     </div>
