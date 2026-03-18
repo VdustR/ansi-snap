@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import SettingsPanel from "./components/SettingsPanel.vue";
 import TerminalPreview from "./components/TerminalPreview.vue";
+import ReloadPrompt from "./components/ReloadPrompt.vue";
 
 const terminalPreview = ref<InstanceType<typeof TerminalPreview> | null>(null);
 
@@ -17,6 +18,7 @@ function getExportElement(): HTMLElement | null {
       <TerminalPreview ref="terminalPreview" />
     </main>
   </div>
+  <ReloadPrompt />
 </template>
 
 <style scoped>
