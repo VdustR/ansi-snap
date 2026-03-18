@@ -1,5 +1,10 @@
 import { ref } from "vue";
-import { toPng, toSvg, toBlob } from "html-to-image";
+import { toPng, toBlob } from "html-to-image";
+
+export interface ExportOptions {
+  transparent: boolean;
+  pixelRatio: number;
+}
 
 const exporting = ref(false);
 const fontReady = ref(false);
@@ -62,21 +67,16 @@ async function withExportLayout<T>(
 }
 
 export function useExport() {
-  async function exportPng(element: HTMLElement, transparent: boolean) {
+  async function exportPng(element: HTMLElement, { transparent, pixelRatio }: ExportOptions) {
     const dataUrl = await withExportLayout(element, transparent, () =>
-      toPng(element, { pixelRatio: 2 }),
+      toPng(element, { pixelRatio }),
     );
     downloadFile(dataUrl, "ansi-snap.png");
   }
 
-  async function exportSvg(element: HTMLElement, transparent: boolean) {
-    const dataUrl = await withExportLayout(element, transparent, () => toSvg(element));
-    downloadFile(dataUrl, "ansi-snap.svg");
-  }
-
-  async function copyToClipboard(element: HTMLElement, transparent: boolean) {
+  async function copyToClipboard(element: HTMLElement, { transparent, pixelRatio }: ExportOptions) {
     await withExportLayout(element, transparent, async () => {
-      const blob = await toBlob(element, { pixelRatio: 2 });
+      const blob = await toBlob(element, { pixelRatio });
       if (blob) {
         await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
       }
@@ -87,7 +87,6 @@ export function useExport() {
     exporting,
     fontReady,
     exportPng,
-    exportSvg,
     copyToClipboard,
   };
 }

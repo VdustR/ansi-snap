@@ -1,32 +1,43 @@
 <script setup lang="ts">
 import { useExport } from "../../composables/useExport";
+import { useSettings } from "../../composables/useSettings";
+import SliderInput from "../ui/SliderInput.vue";
 
 const props = defineProps<{
   getExportElement: () => HTMLElement | null;
   transparent: boolean;
 }>();
 
-const { exporting, fontReady, exportPng, exportSvg, copyToClipboard } = useExport();
+const { settings, updateSetting } = useSettings();
+const { exporting, fontReady, exportPng, copyToClipboard } = useExport();
+
+function getExportOptions() {
+  return { transparent: props.transparent, pixelRatio: settings.exportPixelRatio };
+}
 
 async function onExportPng() {
   const el = props.getExportElement();
-  if (el) await exportPng(el, props.transparent);
-}
-
-async function onExportSvg() {
-  const el = props.getExportElement();
-  if (el) await exportSvg(el, props.transparent);
+  if (el) await exportPng(el, getExportOptions());
 }
 
 async function onCopy() {
   const el = props.getExportElement();
-  if (el) await copyToClipboard(el, props.transparent);
+  if (el) await copyToClipboard(el, getExportOptions());
 }
 </script>
 
 <template>
   <section class="settings-section">
     <h3 class="section-title">Export</h3>
+    <SliderInput
+      :model-value="settings.exportPixelRatio"
+      label="Pixel Ratio"
+      :min="1"
+      :max="4"
+      :step="1"
+      unit="x"
+      @update:model-value="updateSetting('exportPixelRatio', $event)"
+    />
     <div class="export-buttons">
       <button class="export-btn" :disabled="!fontReady || exporting" @click="onExportPng">
         <svg
@@ -42,21 +53,6 @@ async function onCopy() {
           <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
         PNG
-      </button>
-      <button class="export-btn" :disabled="!fontReady || exporting" @click="onExportSvg">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="7 10 12 15 17 10" />
-          <line x1="12" y1="15" x2="12" y2="3" />
-        </svg>
-        SVG
       </button>
       <button class="export-btn" :disabled="!fontReady || exporting" @click="onCopy">
         <svg

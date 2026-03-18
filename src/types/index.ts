@@ -50,6 +50,9 @@ export interface AnsiSnapSettings {
   contentPaddingX: number;
   contentPaddingY: number;
 
+  // Export
+  exportPixelRatio: number;
+
   // Custom CSS
   customCss: string;
 }
