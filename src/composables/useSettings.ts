@@ -45,6 +45,7 @@ watch(
 function applyThemeColors(theme: Theme) {
   state.backgroundColor = theme.background;
   state.foregroundColor = theme.foreground;
+  state.titleColor = theme.foreground;
   state.cursorColor = theme.cursorColor ?? theme.foreground;
   state.cursorText = theme.cursorText ?? theme.background;
   state.selectionBackground = theme.selectionBackground ?? "";

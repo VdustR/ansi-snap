@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import InputText from "primevue/inputtext";
+
 const props = defineProps<{
   modelValue: string;
   label: string;
@@ -13,43 +15,36 @@ function onInput(event: Event) {
   emit("update:modelValue", target.value);
 }
 
-function onTextInput(event: Event) {
-  const target = event.target as HTMLInputElement;
-  const value = target.value.trim();
-  if (/^#[0-9a-f]{3,8}$/i.test(value) || /^rgb/i.test(value)) {
-    emit("update:modelValue", value);
+function onTextInput(value: string) {
+  const trimmed = value.trim();
+  if (/^#[0-9a-f]{3,8}$/i.test(trimmed) || /^rgb/i.test(trimmed)) {
+    emit("update:modelValue", trimmed);
   }
 }
 </script>
 
 <template>
   <label class="color-picker">
-    <span class="color-picker-label">{{ props.label }}</span>
+    <span class="field-label">{{ props.label }}</span>
     <div class="color-picker-controls">
       <input type="color" :value="props.modelValue" class="color-input" @input="onInput" />
-      <input
-        type="text"
-        :value="props.modelValue"
-        class="color-text"
+      <InputText
+        :model-value="props.modelValue"
         spellcheck="false"
-        @change="onTextInput"
+        class="color-text"
+        @change="onTextInput(($event.target as HTMLInputElement).value)"
       />
     </div>
   </label>
 </template>
 
 <style scoped>
+@import "../settings/settings-shared.css";
+
 .color-picker {
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
-
-.color-picker-label {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .color-picker-controls {
@@ -79,18 +74,6 @@ function onTextInput(event: Event) {
 
 .color-text {
   flex: 1;
-  height: 32px;
-  padding: 0 8px;
-  font-size: 13px;
   font-family: monospace;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
-  color: #e0e0e0;
-  outline: none;
-}
-
-.color-text:focus {
-  border-color: rgba(255, 255, 255, 0.4);
 }
 </style>

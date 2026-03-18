@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import InputText from "primevue/inputtext";
 import { useSettings } from "../../composables/useSettings";
-import SliderInput from "../ui/SliderInput.vue";
-import TextInput from "../ui/TextInput.vue";
+import LabeledSlider from "../ui/LabeledSlider.vue";
 
 const { settings, updateSetting } = useSettings();
 </script>
@@ -9,12 +9,16 @@ const { settings, updateSetting } = useSettings();
 <template>
   <section class="settings-section">
     <h3 class="section-title">Content</h3>
-    <TextInput
-      label="Font Family"
-      :model-value="settings.contentFontFamily"
-      @update:model-value="updateSetting('contentFontFamily', $event)"
-    />
-    <SliderInput
+    <div class="field">
+      <label class="field-label">Font Family</label>
+      <div class="p-fluid">
+        <InputText
+          :model-value="settings.contentFontFamily"
+          @update:model-value="updateSetting('contentFontFamily', $event ?? '')"
+        />
+      </div>
+    </div>
+    <LabeledSlider
       label="Font Size"
       :model-value="settings.contentFontSize"
       :min="8"
@@ -23,7 +27,7 @@ const { settings, updateSetting } = useSettings();
       unit="px"
       @update:model-value="updateSetting('contentFontSize', $event)"
     />
-    <SliderInput
+    <LabeledSlider
       label="Line Height"
       :model-value="settings.contentLineHeight"
       :min="1"
@@ -31,7 +35,7 @@ const { settings, updateSetting } = useSettings();
       :step="0.1"
       @update:model-value="updateSetting('contentLineHeight', $event)"
     />
-    <SliderInput
+    <LabeledSlider
       label="Letter Spacing"
       :model-value="settings.contentLetterSpacing"
       :min="-2"
@@ -40,7 +44,7 @@ const { settings, updateSetting } = useSettings();
       unit="px"
       @update:model-value="updateSetting('contentLetterSpacing', $event)"
     />
-    <SliderInput
+    <LabeledSlider
       label="Padding X"
       :model-value="settings.contentPaddingX"
       :min="0"
@@ -49,7 +53,7 @@ const { settings, updateSetting } = useSettings();
       unit="px"
       @update:model-value="updateSetting('contentPaddingX', $event)"
     />
-    <SliderInput
+    <LabeledSlider
       label="Padding Y"
       :model-value="settings.contentPaddingY"
       :min="0"
