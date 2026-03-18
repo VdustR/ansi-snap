@@ -2,6 +2,18 @@ export type ChromeStyle = "macos" | "windows" | "linux" | "minimal" | "none";
 
 export type TitleAlign = "left" | "center" | "right";
 
+// "normal" = CSS 400, "bold" = CSS 700; kept as keywords for readability
+export type TitleFontWeight =
+  | "normal"
+  | "bold"
+  | "100"
+  | "200"
+  | "300"
+  | "500"
+  | "600"
+  | "800"
+  | "900";
+
 export interface Palette {
   0: string;
   1: string;
@@ -39,8 +51,10 @@ export interface AnsiSnapSettings {
   // Title
   titleText: string;
   titleAlign: TitleAlign;
+  titleColor: string;
   titleFontFamily: string;
   titleFontSize: number;
+  titleFontWeight: TitleFontWeight;
 
   // Content
   contentFontFamily: string;

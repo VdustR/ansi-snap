@@ -1,14 +1,10 @@
 <script setup lang="ts">
+import Textarea from "primevue/textarea";
 import { useSettings } from "../../composables/useSettings";
 import { useCustomCss } from "../../composables/useCustomCss";
 
 const { settings, updateSetting } = useSettings();
 useCustomCss();
-
-function onInput(event: Event) {
-  const target = event.target as HTMLTextAreaElement;
-  updateSetting("customCss", target.value);
-}
 </script>
 
 <template>
@@ -26,14 +22,16 @@ function onInput(event: Event) {
         --title-align, --title-padding</span
       >
     </details>
-    <textarea
-      class="css-editor"
-      :value="settings.customCss"
-      placeholder='[data-ansi-snap="preview"] { }'
-      spellcheck="false"
-      rows="6"
-      @input="onInput"
-    />
+    <div class="p-fluid">
+      <Textarea
+        :model-value="settings.customCss"
+        placeholder='[data-ansi-snap="preview"] { }'
+        spellcheck="false"
+        rows="6"
+        class="css-editor"
+        @update:model-value="updateSetting('customCss', $event)"
+      />
+    </div>
   </section>
 </template>
 
@@ -41,21 +39,10 @@ function onInput(event: Event) {
 @import "./settings-shared.css";
 
 .css-editor {
-  width: 100%;
-  padding: 8px;
   font-family: monospace;
   font-size: 12px;
   line-height: 1.5;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 6px;
-  color: #e0e0e0;
   resize: vertical;
-  outline: none;
-}
-
-.css-editor:focus {
-  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .css-selectors {

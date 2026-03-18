@@ -12,7 +12,7 @@ const props = defineProps<{
   getExportElement: () => HTMLElement | null;
 }>();
 
-const { settings, resetToDefaults } = useSettings();
+const { resetToDefaults } = useSettings();
 </script>
 
 <template>
@@ -22,21 +22,45 @@ const { settings, resetToDefaults } = useSettings();
         <img src="/favicon.svg" alt="" width="24" height="24" class="settings-logo" />
         ansi-snap
       </h1>
-      <button class="reset-btn" title="Reset to defaults" @click="resetToDefaults">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+      <div class="header-actions">
+        <a
+          href="https://github.com/VdustR/ansi-snap#readme"
+          target="_blank"
+          rel="noopener"
+          class="icon-btn"
+          title="Documentation"
         >
-          <path d="M3 12a9 9 0 1 1 3 6.36" />
-          <polyline points="3 22 3 16 9 16" />
-        </svg>
-      </button>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4" />
+            <path d="M12 8h.01" />
+          </svg>
+        </a>
+        <button class="icon-btn" title="Reset to defaults" @click="resetToDefaults">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 12a9 9 0 1 1 3 6.36" />
+            <polyline points="3 22 3 16 9 16" />
+          </svg>
+        </button>
+      </div>
     </div>
     <div class="settings-body">
       <ThemeSettings />
@@ -51,10 +75,7 @@ const { settings, resetToDefaults } = useSettings();
       <div class="settings-divider" />
       <CustomCssSettings />
       <div class="settings-divider" />
-      <ExportSettings
-        :get-export-element="props.getExportElement"
-        :transparent="settings.transparentBackground"
-      />
+      <ExportSettings :get-export-element="props.getExportElement" />
     </div>
     <footer class="settings-footer">
       <span>MIT License</span>
@@ -111,21 +132,28 @@ const { settings, resetToDefaults } = useSettings();
   flex-shrink: 0;
 }
 
-.reset-btn {
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: transparent;
   border: 1px solid transparent;
   border-radius: 6px;
+  background: transparent;
   color: rgba(255, 255, 255, 0.35);
   cursor: pointer;
   transition: all 0.15s ease-out;
+  text-decoration: none;
 }
 
-.reset-btn:hover {
+.icon-btn:hover {
   color: rgba(255, 255, 255, 0.8);
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.1);
