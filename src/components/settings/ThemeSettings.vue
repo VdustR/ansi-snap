@@ -31,16 +31,6 @@ function onThemeSelect(theme: Theme) {
         @update:model-value="updateSetting('foregroundColor', $event)"
       />
     </div>
-    <label class="checkbox-row">
-      <input
-        type="checkbox"
-        :checked="settings.transparentBackground"
-        @change="
-          updateSetting('transparentBackground', ($event.target as HTMLInputElement).checked)
-        "
-      />
-      <span>Transparent background (export only)</span>
-    </label>
   </section>
 </template>
 
@@ -57,18 +47,5 @@ function onThemeSelect(theme: Theme) {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-}
-
-.checkbox-row input {
-  cursor: pointer;
 }
 </style>

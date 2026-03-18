@@ -43,11 +43,11 @@ const titleRowStyle = computed(() => {
     }
   }
   return {
-    "--title-color": settings.foregroundColor,
-    "--title-opacity": "0.7",
+    "--title-color": settings.titleColor,
+    "--title-opacity": "1",
     "--title-font": settings.titleFontFamily,
     "--title-size": `${String(settings.titleFontSize)}px`,
-    "--title-weight": "normal",
+    "--title-weight": settings.titleFontWeight,
     "--title-align": settings.titleAlign,
     "--title-padding": padding,
   };

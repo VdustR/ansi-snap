@@ -16,10 +16,12 @@ export const defaults: AnsiSnapSettings = {
 
   chromeStyle: "macos",
 
-  titleText: "",
+  titleText: "VdustR.dev/ansi-snap",
   titleAlign: "center",
+  titleColor: defaultTheme.foreground,
   titleFontFamily: "'Maple Mono NF CN', monospace",
   titleFontSize: 13,
+  titleFontWeight: "normal",
 
   contentFontFamily: "'Maple Mono NF CN', monospace",
   contentFontSize: 14,

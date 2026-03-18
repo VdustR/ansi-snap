@@ -27,6 +27,11 @@ This makes ansi-snap especially useful for content that traditional code snapsho
   - **[VS Code](https://code.visualstudio.com/) Editor** — copy with ⌘C; syntax highlighting colors are preserved
 - 485+ themes from [iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes) with fuzzy search
 - Full ANSI palette (0–15) customization — including link/URL color (palette 4)
+  - **Ghostty** uses palette 4 for hyperlink URLs — Ghostty copies HTML with CSS variables (e.g. `var(--color-4)`), so changing palette 4 in ansi-snap updates link colors in the preview
+  - **VS Code** terminal does not use palette 4 for URLs — VS Code copies HTML with inline hex colors (e.g. `color: #4dc4ff`) that are independent of the ANSI palette, so changing palette 4 has no effect on link colors
+
+> **Note on themes:** The theme setting controls the **background**, **foreground** (default text color), and — depending on the source — **link colors** only. It does **not** override colors already embedded in the pasted content; text with explicit ANSI or syntax-highlighting colors will always keep its original color. For best results, pick the same theme your terminal or editor uses so the background and default text match, or choose any theme you like and let the pasted colors stand on their own.
+
 - Window chrome styles: macOS, Windows, Linux (GNOME), Minimal, None
 - Custom title bar with alignment options
 - Export as PNG (2x) or copy to clipboard

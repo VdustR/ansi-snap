@@ -1,18 +1,19 @@
 <script setup lang="ts">
+import Button from "primevue/button";
+import Checkbox from "primevue/checkbox";
 import { useExport } from "../../composables/useExport";
 import { useSettings } from "../../composables/useSettings";
-import SliderInput from "../ui/SliderInput.vue";
+import LabeledSlider from "../ui/LabeledSlider.vue";
 
 const props = defineProps<{
   getExportElement: () => HTMLElement | null;
-  transparent: boolean;
 }>();
 
 const { settings, updateSetting } = useSettings();
 const { exporting, fontReady, exportPng, copyToClipboard } = useExport();
 
 function getExportOptions() {
-  return { transparent: props.transparent, pixelRatio: settings.exportPixelRatio };
+  return { transparent: settings.transparentBackground, pixelRatio: settings.exportPixelRatio };
 }
 
 async function onExportPng() {
@@ -29,7 +30,7 @@ async function onCopy() {
 <template>
   <section class="settings-section">
     <h3 class="section-title">Export</h3>
-    <SliderInput
+    <LabeledSlider
       :model-value="settings.exportPixelRatio"
       label="Pixel Ratio"
       :min="1"
@@ -38,8 +39,22 @@ async function onCopy() {
       unit="x"
       @update:model-value="updateSetting('exportPixelRatio', $event)"
     />
+    <label class="checkbox-row">
+      <Checkbox
+        :binary="true"
+        :model-value="settings.transparentBackground"
+        @update:model-value="updateSetting('transparentBackground', $event as boolean)"
+      />
+      <span>Transparent background</span>
+    </label>
     <div class="export-buttons">
-      <button class="export-btn" :disabled="!fontReady || exporting" @click="onExportPng">
+      <Button
+        severity="secondary"
+        outlined
+        :disabled="!fontReady || exporting"
+        class="export-btn"
+        @click="onExportPng"
+      >
         <svg
           width="16"
           height="16"
@@ -53,8 +68,14 @@ async function onCopy() {
           <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
         PNG
-      </button>
-      <button class="export-btn" :disabled="!fontReady || exporting" @click="onCopy">
+      </Button>
+      <Button
+        severity="secondary"
+        outlined
+        :disabled="!fontReady || exporting"
+        class="export-btn"
+        @click="onCopy"
+      >
         <svg
           width="16"
           height="16"
@@ -67,7 +88,7 @@ async function onCopy() {
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
         </svg>
         Copy
-      </button>
+      </Button>
     </div>
     <p v-if="!fontReady" class="loading-hint">Loading fonts...</p>
     <p v-if="exporting" class="loading-hint">Exporting...</p>
@@ -88,25 +109,6 @@ async function onCopy() {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  height: 36px;
-  font-size: 13px;
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 6px;
-  color: #e0e0e0;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.export-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.export-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
 }
 
 .loading-hint {
