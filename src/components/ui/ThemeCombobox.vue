@@ -19,6 +19,10 @@ const suggestions = ref<Theme[]>([]);
 async function onComplete(event: { originalEvent: Event; query: string }) {
   await loadAllThemes();
   query.value = event.query;
+  // Always spread a new array — the watcher below won't fire when query
+  // is unchanged (e.g. re-focus after blur with query still ""), so we
+  // must also push a fresh reference here to re-open the panel.
+  suggestions.value = [...filtered.value];
 }
 
 function onItemSelect(event: { originalEvent: Event; value: Theme }) {
@@ -44,7 +48,6 @@ watch(query, () => {
         :suggestions="suggestions"
         option-label="name"
         :placeholder="props.modelValue || 'Search themes...'"
-        :virtual-scroller-options="{ itemSize: 28 }"
         scroll-height="240px"
         :complete-on-focus="true"
         dropdown
@@ -102,9 +105,7 @@ watch(query, () => {
 }
 
 .option-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 
 .option-active-mark {
