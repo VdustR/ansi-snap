@@ -16,7 +16,7 @@ export const defaults: AnsiSnapSettings = {
 
   chromeStyle: "macos",
 
-  titleText: "VdustR.dev/ansi-snap",
+  titleText: "vdustr.github.io/ansi-snap",
   titleAlign: "center",
   titleColor: defaultTheme.foreground,
   titleFontFamily: "'Maple Mono NF CN', monospace",
