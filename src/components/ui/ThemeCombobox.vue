@@ -55,7 +55,7 @@ watch(query, () => {
         :delay="0"
         :loading="loading"
         @complete="onComplete"
-        @item-select="onItemSelect"
+        @option-select="onItemSelect"
         @update:model-value="
           (val: string | Theme) => {
             if (typeof val === 'string') query = val;
