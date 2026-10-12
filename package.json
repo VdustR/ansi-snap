@@ -35,7 +35,9 @@
     "overrides": {
       "vite": "npm:@voidzero-dev/vite-plus-core@latest",
       "vitest": "4.1.11",
-      "postcss": "8.5.26"
+      "postcss": "8.5.26",
+      "undici": "8.10.2",
+      "fast-uri": "3.1.7"
     }
   }
 }
