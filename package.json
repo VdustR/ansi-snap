@@ -14,7 +14,7 @@
     "@primeuix/themes": "^2.0.3",
     "html-to-image": "^1.11.13",
     "primevue": "^4.5.5",
-    "vue": "^3.5.41"
+    "vue": "3.5.42"
   },
   "devDependencies": {
     "@types/node": "^26.3.0",
@@ -37,7 +37,13 @@
       "vitest": "4.1.11",
       "postcss": "8.5.26",
       "undici": "8.10.2",
-      "fast-uri": "3.1.7"
+      "fast-uri": "3.1.7",
+      "source-map-js@<1.2.2": "1.2.2",
+      "tinypool@<2.1.2": "2.1.2",
+      "brace-expansion@>=2.0.0 <2.1.7": "2.1.7",
+      "brace-expansion@>=4.0.0 <5.0.12": "5.0.12",
+      "@vue/compiler-dom@3.5.41": "3.5.42",
+      "@vue/shared": "3.5.42"
     }
   }
 }
