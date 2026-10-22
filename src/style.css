@@ -52,10 +52,7 @@ body {
 }
 
 body {
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   background: #0f172a;
   color: #f8fafc;
   line-height: 1.5;
